@@ -1,20 +1,11 @@
 // routes/auth.js
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
 const JWT_SECRET = process.env.JWT_SECRET || "replace_with_a_strong_secret";
-
-// Esquema de usuario
-const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  email:    { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-}, { timestamps: true });
-
-const User = mongoose.model('User', userSchema);
 
 // -------------------- REGISTER --------------------
 router.post('/register', async (req, res) => {
